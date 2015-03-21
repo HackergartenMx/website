@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ template "theme/partials/head.html" . }}
+
+{{ if isset .Params "feature" }}
+<body id="post" class="feature">
+{{ else }}
+<body id="post">
+{{ end }}
+
+{{ template "theme/partials/nav.html" . }}
+
+  {{ if isset .Params "feature" }}
+  <div class="entry-header">
+    {{ if isset .Params.feature "url" }}
+    <div class="image-credit">Image source: <a href="{{ .Params.feature.url }}">{{ .Params.feature.source }}</a></div>
+    {{ else if isset .Params.feature "source" }}
+    <div class="image-credit">Image source: {{ .Params.source }}</div>
+    {{ end }}
+    <div class="entry-image">
+      <img src="{{ .Site.BaseUrl }}/images/{{ .Params.feature.image }}">
+    </div>
+  </div>
+  {{ end }}
+
+  <div id="main" role="main">
+    <article class="hentry">
+
+      <header class="header-title">
+        <div class="header-title-wrap">
+          <h1 class="entry-title"><a href="{{ .Permalink }}" rel="bookmark" title="{{ .Title }}">{{ .Title }}</a></h1>
+          <h2><time datetime="{{ .Date.Format .Site.Params.TimestampFormat }}">{{ .Date.Format .Site.Params.PublishedDateFormat }}</time></h2>
+          <p class="entry-reading-time">
+            <i class="fa fa-clock-o"></i>
+            Reading time ~{{ .ReadingTime }} minutes
+          </p>
+        </div>
+      </header>
+
+      <div class="entry-content">
+        {{ .Content }}
+        <footer class="entry-meta">
+          {{ if .Params.tags }}
+          <span class="entry-tags">
+            {{ $baseUrl := .Site.BaseUrl }}
+            {{ range .Params.tags }}
+            <a href="{{ $baseUrl }}/tags/{{ . | urlize }}" title="Pages tagged {{ . }}" class="tag">{{ . }}</a>
+            {{ end }}
+          </span>
+          {{ end }}
+
+
+          {{ if .Params.categories }}
+          <span class="entry-tags">
+            {{ $baseUrl := .Site.BaseUrl }}
+            {{ range .Params.categories }}
+            <a href="{{ $baseUrl }}/categories/{{ . | urlize }}" title="Pages tagged {{ . }}" class="tag">{{ . }}</a>
+            {{ end }}
+          </span>
+          {{ end }}
+
+          <span><a href="{{ .Permalink }}" rel="bookmark" title="{{ .Title }}">{{ .Title }}</a> was published on <span class="entry-date date published updated"><time datetime="{{ .Date.Format .Site.Params.TimestampFormat }}">{{ .Date.Format .Site.Params.PublishedDateFormat }}</time></span></span>
+          {{ if isset .Params "revisedDate" }}(revised: <span class="entry-date date modified"><time datetime="{{ .Params.revisedDate.Format .Site.Params.TimestampFormat }}">{{ .Params.revisedDate.Format .Site.Params.PublishedDateFormat }}</time></span>){{ end }}
+
+
+          {{ if isset .Params "author" }}<span class="author vcard"><span class="fn"><a href="{{ .Site.BaseUrl }}/about/" title="About {{ .Site.Params.Author }}">{{ .Params.author }}</a></span></span>{{ end }}
+          <div class="social-share">
+            <ul class="socialcount socialcount-small inline-list like js grade-a activate-on-hover">
+              <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>
+              <li class="twitter"><a href="https://twitter.com/intent/tweet?text={{ .Permalink }}" title="Share on Twitter"><span class="count"><i class="fa fa-twitter-square"></i> Tweet</span></a></li>
+              <li class="googleplus"><a href="https://plus.google.com/share?url={{ .Permalink }}" title="Share on Google Plus"><span class="count"><i class="fa fa-google-plus-square"></i> +1</span></a></li>
+            </ul>
+          </div>
+        </footer>
+      </div>
+    </article>
+
+    {{ if .Site.DisqusShortname }}
+    <section id="disqus_thread">
+    {{ template "_internal/disqus.html" . }}
+    </section>
+    {{ end }}
+
+    <div class="read-more">
+      <div class="read-more-list">
+        <div class="list-item">
+          {{ with .Prev }}
+          <h4><a href="{{.Permalink}}" title="Sample Link Post">{{ .Title }}</a></h4>
+          <span>Published on {{ .Date.Format .Site.Params.PublishedDateFormat }}</span>
+          {{ end }}
+        </div>
+        <div class="list-item">
+          {{ with .Next }}
+          <h4><a href="{{.Permalink}}" title="A Post with a Video">{{ .Title }}</a></h4>
+          <span>Published on {{ .Date.Format .Site.Params.PublishedDateFormat }}</span>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+{{ template "theme/partials/footer.html" . }}
+</body>
+</html>

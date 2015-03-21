@@ -1,0 +1,17 @@
+baseurl = "http://hackergarten.mx/"
+languageCode = "en-us"
+title = "Doing OpenSource"
+
+pygmentsuseclasses = true
+disqusShortname = "hackergartenmexico"
+
+[Params]
+PublishedDateFormat = "2006-01-02"
+TimestampFormat = "2006-01-02T15:04:05Z07:00"
+
+Auther = "Hackergarten Mexico"
+Autherr = "Hackergarten Mexico"
+Profile = "Mexican coders doing Open Source"
+TwitterId = "hackergartenmx"
+GitHubId = "hackergartenmx"
+GoogleAnaliticsId = "UA-60982924-1"
