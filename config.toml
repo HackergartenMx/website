@@ -1,6 +1,6 @@
 baseurl = "http://hackergarten.mx/"
 languageCode = "en-us"
-title = "Doing OpenSource from Mexico City"
+title = "Doing OpenSource"
 
 pygmentsuseclasses = true
 disqusShortname = "hackergartenmexico"
