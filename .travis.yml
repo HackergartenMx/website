@@ -1,11 +1,14 @@
 language: go
 
+before_install:
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - echo -e "$DEPLOY_PRIVATE_KEY" > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - eval `ssh-agent -s`
+  - ssh-add ~/.ssh/id_rsa
+
 install:
   - go get -v github.com/spf13/hugo
 
 script:
   - ./deploy.sh
-
-env:
-  global:
-  - secure: "d/ex2k4LRiH+aLyHmtBhQbi4E9cE1lB73Z0nM281hUAI+gVdzeGiu3+Dt+fiFPIRI1t/ybQSfc2jLKqB/tLzwhF+nUzhHDq3WFhaftJ9YD00AQB6qCcCX9ENbPvLIdG1AON+WjDiVc3R/FxhM/8h++00vOGUKcA3FksE2h1iIq0="
