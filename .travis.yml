@@ -2,7 +2,7 @@ language: go
 
 before_install:
   - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-  - echo -e "$PRIVATE_KEY" > ~/.ssh/id_rsa
+  - echo -e "$THE_KEY" > ~/.ssh/id_rsa
   - chmod 600 ~/.ssh/id_rsa
   - eval `ssh-agent -s`
   - ssh-add ~/.ssh/id_rsa
